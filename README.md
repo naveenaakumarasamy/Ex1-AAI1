@@ -58,13 +58,13 @@ def probs(data, child, parent1=None, parent2=None):
         # Calculate probabilities
         prob=pd.crosstab(data[child], 'Empty', margins=False, normalize='columns').sort_index().to_numpy().reshape(-1).tolist()
     elif parent1!=None:
-            # Check if child node has 1 parent or 2 parents
-            if parent2==None:
+       # Check if child node has 1 parent or 2 parents
+       if parent2==None:
+         # Caclucate probabilities
+         prob=pd.crosstab(data[parent1],data[child], margins=False, normalize='index').sort_index().to_numpy().reshape(-1).tolist()
+       else:
                 # Caclucate probabilities
-                prob=pd.crosstab(data[parent1],data[child], margins=False, normalize='index').sort_index().to_numpy().reshape(-1).tolist()
-            else:
-                # Caclucate probabilities
-                prob=pd.crosstab([data[parent1],data[parent2]],data[child], margins=False, normalize='index').sort_index().to_numpy().reshape(-1).tolist()
+prob=pd.crosstab([data[parent1],data[parent2]],data[child], margins=False, normalize='index').sort_index().to_numpy().reshape(-1).tolist()
     else: print("Error in Probability Frequency Calculations")
     return prob
 ```
